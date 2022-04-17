@@ -41,5 +41,16 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:29.3.1')
 
     // Add the dependencies for the desired Firebase products
+    // Declare the dependency for the Firebase Authentication library
+    implementation 'com.google.firebase:firebase-auth'
+
+    // Declare the dependency for the Realtime Database library
+    implementation 'com.google.firebase:firebase-database'
+
+    // Declare the dependency for the Cloud Storage library
+    implementation 'com.google.firebase:firebase-storage'
+
+
+
 
 }
