@@ -44,12 +44,12 @@ public class RecuperarContaActivity extends AppCompatActivity {
         FirebaseHelper.getAuth().sendPasswordResetEmail(email).addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
                 Toast.makeText(this, "e-Mail enviado com sucesso.\nVerifique sua caixa de entrada para recuperar a senha.", Toast.LENGTH_LONG).show();
-
-                progressBar.setVisibility(View.GONE);
             } else {
                 String error = task.getException().getMessage();
                 Toast.makeText(this, "Erro ao enviar e-Mail de recuperação de senha. Motivo: " + error, Toast.LENGTH_LONG).show();
             }
+
+            progressBar.setVisibility(View.GONE);
         });
     }
 
