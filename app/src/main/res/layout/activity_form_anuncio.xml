@@ -40,10 +40,11 @@
 
                 <ImageView
                     android:id="@+id/img_anuncio"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:src="@drawable/ic_foto"
-                    android:layout_gravity="center"/>
+                    android:scaleType="centerCrop"/>
             </androidx.cardview.widget.CardView>
 
             <EditText

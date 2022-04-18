@@ -3,6 +3,9 @@ package com.exemplo.casaportemporada.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.ImageDecoder;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.exemplo.casaportemporada.R;
@@ -19,6 +23,7 @@ import com.exemplo.casaportemporada.model.Produto;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
 
+import java.io.IOException;
 import java.util.List;
 
 public class FormAnuncioActivity extends AppCompatActivity {
@@ -47,6 +52,35 @@ public class FormAnuncioActivity extends AppCompatActivity {
         configCliques();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK) {
+            if(requestCode == REQUEST_GALERIA) {
+                Uri localImagemSelecionada = data.getData();
+                caminhoImagem = localImagemSelecionada.toString();
+
+                if(Build.VERSION.SDK_INT < 28) {
+                    try {
+                        imagem = MediaStore.Images.Media.getBitmap(getBaseContext().getContentResolver(), localImagemSelecionada);
+                    } catch (IOException e) {
+                        Toast.makeText(this, "Erro ao carregar imagem da galeria. Motivo: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    ImageDecoder.Source source = ImageDecoder.createSource(getBaseContext().getContentResolver(), localImagemSelecionada);
+                    try {
+                        imagem = ImageDecoder.decodeBitmap(source);
+                    } catch (IOException e) {
+                        Toast.makeText(this, "Erro ao carregar imagem da galeria. Motivo:  " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                img_anuncio.setImageBitmap(imagem);
+            }
+        }
+    }
+
     private void configCliques() {
         findViewById(R.id.ib_salvar).setOnClickListener(view -> {
             validarDados();
@@ -56,6 +90,8 @@ public class FormAnuncioActivity extends AppCompatActivity {
     private void iniciarComponentes() {
         TextView text_titulo = findViewById(R.id.text_titulo);
         text_titulo.setText("Form anúncio");
+
+        img_anuncio = findViewById(R.id.img_anuncio);
 
         edit_titulo = findViewById(R.id.edit_titulo);
         edit_descricao = findViewById(R.id.edit_descricao);
