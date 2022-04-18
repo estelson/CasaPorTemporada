@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CasaPorTemporada">
         <activity
+            android:name=".activity.autenticacao.RecuperarContaActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.autenticacao.CriarContaActivity"
             android:exported="false" />
         <activity

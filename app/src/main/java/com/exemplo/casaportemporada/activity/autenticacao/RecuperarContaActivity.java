@@ -7,12 +7,12 @@ import android.widget.TextView;
 
 import com.exemplo.casaportemporada.R;
 
-public class CriarContaActivity extends AppCompatActivity {
+public class RecuperarContaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_criar_conta);
+        setContentView(R.layout.activity_recuperar_conta);
 
         configCliques();
 
@@ -27,7 +27,7 @@ public class CriarContaActivity extends AppCompatActivity {
 
     private void iniciarComponentes() {
         TextView text_titulo = findViewById(R.id.text_titulo);
-        text_titulo.setText("Crie sua conta");
+        text_titulo.setText("Recuperar conta");
     }
 
 }
