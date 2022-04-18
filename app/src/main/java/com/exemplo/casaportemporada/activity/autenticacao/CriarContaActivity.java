@@ -104,7 +104,7 @@ public class CriarContaActivity extends AppCompatActivity {
                 startActivity(new Intent(this, MainActivity.class));
             } else {
                 String error = task.getException().getMessage();
-                Toast.makeText(this, "Erro ao cadastrar usuário. Motivo: " + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Erro ao cadastrar usuário. Motivo: " + error, Toast.LENGTH_LONG).show();
             }
         });
     }
