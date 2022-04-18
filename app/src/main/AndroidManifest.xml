@@ -11,7 +11,14 @@
         android:theme="@style/Theme.CasaPorTemporada">
         <activity
             android:name=".activity.FormAnuncioActivity"
-            android:exported="false" />
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".activity.autenticacao.RecuperarContaActivity"
             android:exported="false" />
@@ -20,12 +27,7 @@
             android:exported="false" />
         <activity
             android:name=".activity.autenticacao.LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:exported="false">
         </activity>
         <activity
             android:name=".activity.MainActivity"

@@ -44,6 +44,7 @@
             </androidx.cardview.widget.CardView>
 
             <EditText
+                android:id="@+id/edit_titulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Título"
@@ -53,24 +54,17 @@
                 android:background="@drawable/bg_edit"
                 android:padding="16dp"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <EditText
+                android:id="@+id/edit_descricao"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
+                android:hint="Descrição"
                 android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/bg_edit">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Descrição"
-                    android:layout_marginStart="8dp"
-                    android:backgroundTint="@android:color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                android:lines="3"
+                android:background="@drawable/bg_edit"
+                android:padding="16dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -95,6 +89,7 @@
                         android:gravity="center_horizontal"/>
 
                     <EditText
+                        android:id="@+id/edit_quarto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Ex.: 3"
@@ -119,6 +114,7 @@
                         android:gravity="center_horizontal"/>
 
                     <EditText
+                        android:id="@+id/edit_banheiro"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Ex.: 2"
@@ -142,6 +138,7 @@
                         android:gravity="center_horizontal"/>
 
                     <EditText
+                        android:id="@+id/edit_garagem"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Ex.: 1"
@@ -153,6 +150,7 @@
             </LinearLayout>
 
             <CheckBox
+                android:id="@+id/cb_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/azul_padrao"
