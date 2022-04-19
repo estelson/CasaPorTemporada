@@ -76,12 +76,12 @@ public class MeusAnunciosActivity extends AppCompatActivity implements AdapterAn
 
             @Override
             public void onSwipedRight(int position) {
-
+                showDialogDelete(position);
             }
         });
     }
 
-    private void showDialogDelete() {
+    private void showDialogDelete(int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Excluir anúncio");
         builder.setMessage("Clique em SIM para confirmar ou em NÃO para cancelar");
@@ -92,7 +92,13 @@ public class MeusAnunciosActivity extends AppCompatActivity implements AdapterAn
         }));
 
         builder.setPositiveButton("Sim", ((dialogInterface, i) -> {
+//            Anuncio anuncio = anuncioList.get(position);
+//            anuncio.excluir();
 
+            anuncioList.get(position).excluir();
+            Toast.makeText(this, "Anúncio excluído com sucesso", Toast.LENGTH_SHORT).show();
+
+            adapterAnuncios.notifyItemRemoved(position);
         }));
 
         AlertDialog dialog = builder.create();
@@ -114,12 +120,13 @@ public class MeusAnunciosActivity extends AppCompatActivity implements AdapterAn
                         Anuncio anuncio = snap.getValue(Anuncio.class);
                         anuncioList.add(anuncio);
                     }
+
+                    text_info.setVisibility(View.GONE);
                 } else {
                     text_info.setText("Nenhum anúncio cadastrado");
                 }
 
                 progressBar.setVisibility(View.GONE);
-                text_info.setVisibility(View.GONE);
 
                 Collections.reverse(anuncioList);
                 adapterAnuncios.notifyDataSetChanged();
