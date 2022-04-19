@@ -26,6 +26,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.List;
@@ -57,7 +58,26 @@ public class FormAnuncioActivity extends AppCompatActivity {
 
         iniciarComponentes();
 
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null) {
+            anuncio = (Anuncio) bundle.getSerializable("anuncio");
+
+            configDados();
+        }
+
         configCliques();
+    }
+
+    private void configDados() {
+        Picasso.get().load(anuncio.getUrlImagem()).into(img_anuncio);
+
+        edit_titulo.setText(anuncio.getTitulo());
+        edit_descricao.setText(anuncio.getDescricao());
+        edit_quarto.setText(anuncio.getQuarto());
+        edit_banheiro.setText(anuncio.getBanheiro());
+        edit_garagem.setText(anuncio.getGaragem());
+
+        cb_status.setChecked(anuncio.isStatus());
     }
 
     @Override
@@ -92,6 +112,10 @@ public class FormAnuncioActivity extends AppCompatActivity {
     private void configCliques() {
         findViewById(R.id.ib_salvar).setOnClickListener(view -> {
             validarDados();
+        });
+
+        findViewById(R.id.ib_voltar).setOnClickListener(view -> {
+            finish();
         });
     }
 
@@ -138,7 +162,15 @@ public class FormAnuncioActivity extends AppCompatActivity {
                             if(caminhoImagem != null) {
                                 salvarImagemAnuncio();
                             } else {
-                                Toast.makeText(this, "Selecione uma imagem para o anúncio", Toast.LENGTH_SHORT).show();
+                                if(anuncio.getUrlImagem() != null) {
+                                    anuncio.salvar();
+
+                                    Toast.makeText(this, "Anúncio alterado com sucesso", Toast.LENGTH_SHORT).show();
+
+                                    //finish();
+                                } else {
+                                    Toast.makeText(this, "Selecione uma imagem para o anúncio", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         } else {
                             edit_garagem.requestFocus();

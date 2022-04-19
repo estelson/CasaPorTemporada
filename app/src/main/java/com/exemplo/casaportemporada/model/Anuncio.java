@@ -3,7 +3,9 @@ package com.exemplo.casaportemporada.model;
 import com.exemplo.casaportemporada.helper.FirebaseHelper;
 import com.google.firebase.database.DatabaseReference;
 
-public class Anuncio {
+import java.io.Serializable;
+
+public class Anuncio implements Serializable {
 
     private String id;
     private String titulo;

@@ -19,8 +19,11 @@ public class AdapterAnuncios extends RecyclerView.Adapter<AdapterAnuncios.MyView
 
     private List<Anuncio> anuncioList;
 
-    public AdapterAnuncios(List<Anuncio> anuncioList) {
+    private OnClick onClick;
+
+    public AdapterAnuncios(List<Anuncio> anuncioList, OnClick onClick) {
         this.anuncioList = anuncioList;
+        this.onClick = onClick;
     }
 
     @NonNull
@@ -40,11 +43,19 @@ public class AdapterAnuncios extends RecyclerView.Adapter<AdapterAnuncios.MyView
         holder.text_titulo.setText(anuncio.getTitulo());
         holder.text_descricao.setText(anuncio.getDescricao());
         holder.text_data.setText("");
+
+        holder.itemView.setOnClickListener(view -> {
+            onClick.OnClickListener(anuncio);
+        });
     }
 
     @Override
     public int getItemCount() {
         return anuncioList.size();
+    }
+
+    public interface OnClick {
+        public void OnClickListener(Anuncio anuncio);
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {

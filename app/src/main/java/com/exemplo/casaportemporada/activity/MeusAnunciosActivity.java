@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.exemplo.casaportemporada.R;
 import com.exemplo.casaportemporada.adapter.AdapterAnuncios;
@@ -25,7 +26,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class MeusAnunciosActivity extends AppCompatActivity {
+public class MeusAnunciosActivity extends AppCompatActivity implements AdapterAnuncios.OnClick {
 
     private List<Anuncio> anuncioList = new ArrayList<>();
 
@@ -63,7 +64,7 @@ public class MeusAnunciosActivity extends AppCompatActivity {
     private void configRv() {
         rv_anuncios.setLayoutManager(new LinearLayoutManager(this));
         rv_anuncios.setHasFixedSize(true);
-        adapterAnuncios = new AdapterAnuncios(anuncioList);
+        adapterAnuncios = new AdapterAnuncios(anuncioList, this);
         rv_anuncios.setAdapter(adapterAnuncios);
     }
 
@@ -109,4 +110,11 @@ public class MeusAnunciosActivity extends AppCompatActivity {
         rv_anuncios = findViewById(R.id.rv_anuncios);
     }
 
+    @Override
+    public void OnClickListener(Anuncio anuncio) {
+        Intent intent = new Intent(this, FormAnuncioActivity.class);
+        intent.putExtra("anuncio", anuncio);
+
+        startActivity(intent);
+    }
 }
