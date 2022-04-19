@@ -19,7 +19,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.exemplo.casaportemporada.R;
-import com.exemplo.casaportemporada.model.Produto;
+import com.exemplo.casaportemporada.helper.FirebaseHelper;
+import com.exemplo.casaportemporada.model.Anuncio;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.normal.TedPermission;
 
@@ -41,6 +44,8 @@ public class FormAnuncioActivity extends AppCompatActivity {
     private EditText edit_garagem;
 
     private CheckBox cb_status;
+
+    private Anuncio anuncio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,13 +119,22 @@ public class FormAnuncioActivity extends AppCompatActivity {
                 if (!quarto.isEmpty()) {
                     if (!banheiro.isEmpty()) {
                         if (!garagem.isEmpty()) {
-                            Produto produto = new Produto();
-                            produto.setTitulo(titulo);
-                            produto.setDescricao(descricao);
-                            produto.setQuarto(quarto);
-                            produto.setBanheiro(banheiro);
-                            produto.setGaragem(garagem);
-                            produto.setStatus(cb_status.isChecked());
+                            if(anuncio == null) {
+                                anuncio = new Anuncio();
+                            }
+
+                            anuncio.setTitulo(titulo);
+                            anuncio.setDescricao(descricao);
+                            anuncio.setQuarto(quarto);
+                            anuncio.setBanheiro(banheiro);
+                            anuncio.setGaragem(garagem);
+                            anuncio.setStatus(cb_status.isChecked());
+
+                            if(caminhoImagem != null) {
+                                salvarImagemAnuncio();
+                            } else {
+                                Toast.makeText(this, "Selecione uma imagem para o anúncio", Toast.LENGTH_SHORT).show();
+                            }
                         } else {
                             edit_garagem.requestFocus();
                             edit_garagem.setError("Informe a quantidade de vagas de garagem");
@@ -141,6 +155,27 @@ public class FormAnuncioActivity extends AppCompatActivity {
             edit_titulo.requestFocus();
             edit_titulo.setError("Informe um título");
         }
+    }
+
+    private void salvarImagemAnuncio() {
+        StorageReference storageReference = FirebaseHelper.getStorageReference()
+                .child("imagens")
+                .child("anuncios")
+                .child(anuncio.getId() + ".jpeg");
+
+        UploadTask uploadTask = storageReference.putFile(Uri.parse(caminhoImagem));
+        uploadTask.addOnSuccessListener(taskSnapshot ->  {
+            storageReference.getDownloadUrl().addOnCompleteListener(task -> {
+                String urlImagem = task.getResult().toString();
+                anuncio.setUrlImagem(urlImagem);
+
+                anuncio.salvar();
+
+                //finish();
+            });
+        }).addOnFailureListener(e -> {
+            Toast.makeText(this, "Erro ao gravar imagem. Motivo: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        });
     }
 
     public void verificarPermissaoGaleria(View view) {

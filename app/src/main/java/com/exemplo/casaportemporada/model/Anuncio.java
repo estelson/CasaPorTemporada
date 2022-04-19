@@ -3,7 +3,7 @@ package com.exemplo.casaportemporada.model;
 import com.exemplo.casaportemporada.helper.FirebaseHelper;
 import com.google.firebase.database.DatabaseReference;
 
-public class Produto {
+public class Anuncio {
 
     private String id;
     private String titulo;
@@ -12,10 +12,20 @@ public class Produto {
     private String banheiro;
     private String garagem;
     private boolean status;
+    private String urlImagem;
 
-    public Produto() {
+    public Anuncio() {
         DatabaseReference reference = FirebaseHelper.getDatabaseReference();
         this.setId(reference.push().getKey());
+    }
+
+    public void salvar() {
+        DatabaseReference reference = FirebaseHelper.getDatabaseReference()
+                .child("anuncios")
+                .child(FirebaseHelper.getUidFirebase())
+                .child(this.getId());
+
+        reference.setValue(this);
     }
 
     public String getId() {
@@ -72,5 +82,13 @@ public class Produto {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public String getUrlImagem() {
+        return urlImagem;
+    }
+
+    public void setUrlImagem(String urlImagem) {
+        this.urlImagem = urlImagem;
     }
 }

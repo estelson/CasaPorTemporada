@@ -159,10 +159,18 @@
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/azul_padrao"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
                 android:text="Disponível"
                 android:textColor="@color/azul_padrao"
                 android:checked="true"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:indeterminateTint="@color/azul_padrao"
+                android:visibility="gone"
+                tools:visibility="visible"/>
 
         </LinearLayout>
 
