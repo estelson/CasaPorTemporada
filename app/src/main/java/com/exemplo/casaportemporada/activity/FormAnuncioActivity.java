@@ -152,6 +152,7 @@ public class FormAnuncioActivity extends AppCompatActivity {
                                 anuncio = new Anuncio();
                             }
 
+                            anuncio.setIdUsuario(FirebaseHelper.getUidFirebase());
                             anuncio.setTitulo(titulo.trim());
                             anuncio.setDescricao(descricao.trim());
                             anuncio.setQuarto(quarto.trim());
