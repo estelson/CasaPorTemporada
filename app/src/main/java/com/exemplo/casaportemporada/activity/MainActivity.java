@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -19,6 +20,7 @@ import com.exemplo.casaportemporada.activity.autenticacao.LoginActivity;
 import com.exemplo.casaportemporada.adapter.AdapterAnuncios;
 import com.exemplo.casaportemporada.helper.FirebaseHelper;
 import com.exemplo.casaportemporada.model.Anuncio;
+import com.exemplo.casaportemporada.model.Filtro;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,10 +42,17 @@ public class MainActivity extends AppCompatActivity implements AdapterAnuncios.O
 
     private ImageButton ib_menu;
 
+    private Filtro filtro;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        filtro = (Filtro) getIntent().getSerializableExtra("filtro");
+        if(filtro != null) {
+            Log.i("INFORTESTE", "onCreate: " + filtro.getQtdQuarto());
+        }
 
         iniciarComponentes();
 

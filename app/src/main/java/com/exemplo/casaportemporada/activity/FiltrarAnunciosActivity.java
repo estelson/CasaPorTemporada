@@ -2,12 +2,14 @@ package com.exemplo.casaportemporada.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.exemplo.casaportemporada.R;
+import com.exemplo.casaportemporada.model.Filtro;
 
 public class FiltrarAnunciosActivity extends AppCompatActivity {
 
@@ -23,6 +25,8 @@ public class FiltrarAnunciosActivity extends AppCompatActivity {
     private int qtd_banheiro;
     private int qtd_garagem;
 
+    private Filtro filtro;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +35,8 @@ public class FiltrarAnunciosActivity extends AppCompatActivity {
         iniciarComponentes();
 
         configCliques();
+
+        configSb();
     }
 
     private void configCliques() {
@@ -52,6 +58,62 @@ public class FiltrarAnunciosActivity extends AppCompatActivity {
         sb_garagem = findViewById(R.id.sb_garagem);
     }
 
+    private void configSb() {
+        sb_quarto.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                text_quarto.setText(progress + " quarto(s) ou mais");
+                qtd_quarto = progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        sb_banheiro.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                text_banheiro.setText(progress + " banheiro(s) ou mais");
+                qtd_banheiro = progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        sb_garagem.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+                text_garagem.setText(progress + " vaga(s) de garagem ou mais");
+                qtd_garagem = progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+    }
+
     public void limparFiltro(View view) {
         qtd_quarto = 0;
         qtd_banheiro = 0;
@@ -62,6 +124,31 @@ public class FiltrarAnunciosActivity extends AppCompatActivity {
         sb_garagem.setProgress(0);
 
         finish();
+    }
+
+    public void filtrar(View view) {
+        if(filtro == null) {
+            filtro = new Filtro();
+        }
+
+        if(qtd_quarto > 0) {
+            filtro.setQtdQuarto(qtd_quarto);
+        }
+
+        if(qtd_banheiro > 0) {
+            filtro.setQtdBanheiro(qtd_banheiro);
+        }
+
+        if(qtd_garagem > 0) {
+            filtro.setQtdGaragem(qtd_garagem);
+        }
+
+        Intent intent = new Intent(this, MainActivity.class);
+        if(qtd_quarto > 0 || qtd_banheiro > 0 || qtd_garagem > 0) {
+            intent.putExtra("filtro", filtro);
+        }
+
+        startActivity(intent);
     }
 
 }
