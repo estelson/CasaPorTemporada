@@ -60,6 +60,10 @@ public class MeusAnunciosActivity extends AppCompatActivity implements AdapterAn
         findViewById(R.id.ib_add).setOnClickListener(view -> {
             startActivity(new Intent(this, FormAnuncioActivity.class));
         });
+
+        findViewById(R.id.ib_voltar).setOnClickListener(view -> {
+            finish();
+        });
     }
 
     private void configRv() {
@@ -140,7 +144,7 @@ public class MeusAnunciosActivity extends AppCompatActivity implements AdapterAn
     }
 
     private void iniciarComponentes() {
-        TextView text_titulo = findViewById(R.id.text_titulo);
+        TextView text_titulo = findViewById(R.id.text_titulo_anuncio);
         text_titulo.setText("Meus anúncios");
 
         progressBar = findViewById(R.id.progressBar);

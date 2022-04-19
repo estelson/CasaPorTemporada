@@ -24,12 +24,22 @@ public class Anuncio implements Serializable {
     }
 
     public void salvar() {
+        // Grava o anúncio do usuário no nó "anuncios" do Firebase Realtime Database.  Aparecerá  na
+        // tela "Meus anúncios"
         DatabaseReference reference = FirebaseHelper.getDatabaseReference()
                 .child("anuncios")
                 .child(FirebaseHelper.getUidFirebase())
                 .child(this.getId());
 
         reference.setValue(this);
+
+        // Grava o anúncio no nó "anuncios_publicos" do Firebase  Realtime  Database.  Aparecerá  na
+        // tela principal
+        DatabaseReference anuncioPublico = FirebaseHelper.getDatabaseReference()
+                .child("anuncios_publicos")
+                .child(this.getId());
+
+        anuncioPublico.setValue(this);
     }
 
     public void excluir() {

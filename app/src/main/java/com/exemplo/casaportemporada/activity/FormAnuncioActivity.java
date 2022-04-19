@@ -120,7 +120,7 @@ public class FormAnuncioActivity extends AppCompatActivity {
     }
 
     private void iniciarComponentes() {
-        TextView text_titulo = findViewById(R.id.text_titulo);
+        TextView text_titulo = findViewById(R.id.text_titulo_anuncio);
         text_titulo.setText("Form anúncio");
 
         img_anuncio = findViewById(R.id.img_anuncio);

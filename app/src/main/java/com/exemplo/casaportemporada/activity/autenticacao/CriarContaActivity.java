@@ -41,7 +41,7 @@ public class CriarContaActivity extends AppCompatActivity {
     }
 
     private void iniciarComponentes() {
-        TextView text_titulo = findViewById(R.id.text_titulo);
+        TextView text_titulo = findViewById(R.id.text_titulo_anuncio);
         text_titulo.setText("Crie sua conta");
 
         edit_nome = findViewById(R.id.edit_nome);
