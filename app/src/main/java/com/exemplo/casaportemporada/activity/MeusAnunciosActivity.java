@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -43,7 +44,20 @@ public class MeusAnunciosActivity extends AppCompatActivity {
 
         configRv();
 
+        configCliques();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
         recuperarAnuncios();
+    }
+
+    private void configCliques() {
+        findViewById(R.id.ib_add).setOnClickListener(view -> {
+            startActivity(new Intent(this, FormAnuncioActivity.class));
+        });
     }
 
     private void configRv() {

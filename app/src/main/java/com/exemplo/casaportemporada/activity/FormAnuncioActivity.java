@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,8 @@ public class FormAnuncioActivity extends AppCompatActivity {
     private EditText edit_garagem;
 
     private CheckBox cb_status;
+
+    private ProgressBar progressBar;
 
     private Anuncio anuncio;
 
@@ -105,6 +108,8 @@ public class FormAnuncioActivity extends AppCompatActivity {
         edit_garagem = findViewById(R.id.edit_garagem);
 
         cb_status = findViewById(R.id.cb_status);
+
+        progressBar = findViewById(R.id.progressBar);
     }
 
     private void validarDados() {
@@ -123,11 +128,11 @@ public class FormAnuncioActivity extends AppCompatActivity {
                                 anuncio = new Anuncio();
                             }
 
-                            anuncio.setTitulo(titulo);
-                            anuncio.setDescricao(descricao);
-                            anuncio.setQuarto(quarto);
-                            anuncio.setBanheiro(banheiro);
-                            anuncio.setGaragem(garagem);
+                            anuncio.setTitulo(titulo.trim());
+                            anuncio.setDescricao(descricao.trim());
+                            anuncio.setQuarto(quarto.trim());
+                            anuncio.setBanheiro(banheiro.trim());
+                            anuncio.setGaragem(garagem.trim());
                             anuncio.setStatus(cb_status.isChecked());
 
                             if(caminhoImagem != null) {
@@ -158,6 +163,8 @@ public class FormAnuncioActivity extends AppCompatActivity {
     }
 
     private void salvarImagemAnuncio() {
+        progressBar.setVisibility(View.VISIBLE);
+
         StorageReference storageReference = FirebaseHelper.getStorageReference()
                 .child("imagens")
                 .child("anuncios")
@@ -171,9 +178,13 @@ public class FormAnuncioActivity extends AppCompatActivity {
 
                 anuncio.salvar();
 
-                //finish();
+                Toast.makeText(this, "Anúncio incluído com sucesso", Toast.LENGTH_SHORT).show();
+
+                finish();
             });
         }).addOnFailureListener(e -> {
+            progressBar.setVisibility(View.GONE);
+
             Toast.makeText(this, "Erro ao gravar imagem. Motivo: " + e.getMessage(), Toast.LENGTH_LONG).show();
         });
     }
