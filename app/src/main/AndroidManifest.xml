@@ -12,35 +12,54 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CasaPorTemporada">
         <activity
-            android:name=".activity.MinhaContaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.MeusAnunciosActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.FiltrarAnunciosActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.FormAnuncioActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.autenticacao.RecuperarContaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.autenticacao.CriarContaActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.autenticacao.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.MainActivity"
-            android:exported="true">
+            android:name=".activity.DetalheAnuncioActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.MinhaContaActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MeusAnunciosActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FiltrarAnunciosActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FormAnuncioActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.autenticacao.RecuperarContaActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.autenticacao.CriarContaActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.autenticacao.LoginActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" /><!-->-->
+        <!--            <intent-filter>-->
+        <!--                <action android:name="android.intent.action.MAIN" />-->
+
+        <!--                <category android:name="android.intent.category.LAUNCHER" />-->
+        <!--            </intent-filter>-->
+        <!--        </activity>-->
     </application>
 
 </manifest>
