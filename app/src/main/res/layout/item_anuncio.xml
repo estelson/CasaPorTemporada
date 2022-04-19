@@ -42,7 +42,7 @@
                 tools:text="Vende-se casa na praia" />
 
             <TextView
-                android:id="@+id/text_descicao"
+                android:id="@+id/text_descricao"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -64,7 +64,7 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/img_anuncio"
-                app:layout_constraintTop_toBottomOf="@+id/text_descicao"
+                app:layout_constraintTop_toBottomOf="@+id/text_descricao"
                 tools:text="03/07/2021 às 13:00" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
