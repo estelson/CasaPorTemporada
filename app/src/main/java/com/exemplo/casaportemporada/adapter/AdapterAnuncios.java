@@ -18,7 +18,6 @@ import java.util.List;
 public class AdapterAnuncios extends RecyclerView.Adapter<AdapterAnuncios.MyViewHolder> {
 
     private List<Anuncio> anuncioList;
-
     private OnClick onClick;
 
     public AdapterAnuncios(List<Anuncio> anuncioList, OnClick onClick) {
@@ -30,23 +29,21 @@ public class AdapterAnuncios extends RecyclerView.Adapter<AdapterAnuncios.MyView
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_anuncio, parent, false);
-
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
         Anuncio anuncio = anuncioList.get(position);
 
         Picasso.get().load(anuncio.getUrlImagem()).into(holder.img_anuncio);
-
         holder.text_titulo.setText(anuncio.getTitulo());
         holder.text_descricao.setText(anuncio.getDescricao());
         holder.text_data.setText("");
 
-        holder.itemView.setOnClickListener(view -> {
-            onClick.OnClickListener(anuncio);
-        });
+        holder.itemView.setOnClickListener(view -> onClick.OnClickListener(anuncio));
+
     }
 
     @Override
@@ -58,18 +55,15 @@ public class AdapterAnuncios extends RecyclerView.Adapter<AdapterAnuncios.MyView
         public void OnClickListener(Anuncio anuncio);
     }
 
-    static class MyViewHolder extends RecyclerView.ViewHolder {
-        ImageView img_anuncio;
+    static class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView text_titulo;
-        TextView text_descricao;
-        TextView text_data;
+        ImageView img_anuncio;
+        TextView text_titulo, text_descricao, text_data;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             img_anuncio = itemView.findViewById(R.id.img_anuncio);
-
             text_titulo = itemView.findViewById(R.id.text_titulo_anuncio);
             text_descricao = itemView.findViewById(R.id.text_descricao);
             text_data = itemView.findViewById(R.id.text_data);

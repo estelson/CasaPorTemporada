@@ -58,6 +58,12 @@ public class Anuncio implements Serializable {
                 storageReference.delete();
             }
         });
+
+        DatabaseReference referencePublico = FirebaseHelper.getDatabaseReference()
+                .child("anuncios_publicos")
+                .child(this.getId());
+
+        referencePublico.removeValue();
     }
 
     public String getId() {
