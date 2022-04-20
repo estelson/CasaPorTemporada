@@ -201,6 +201,8 @@ public class MainActivity extends AppCompatActivity implements AdapterAnuncios.O
                 filtro = (Filtro) data.getSerializableExtra("filtro");
                 recuperaAnunciosFiltro();
             }
+        } else {
+            recuperaAnuncios();
         }
     }
 
