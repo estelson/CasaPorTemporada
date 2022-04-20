@@ -74,6 +74,7 @@ public class MinhaContaActivity extends AppCompatActivity {
         findViewById(R.id.ib_voltar).setOnClickListener(view -> finish());
         findViewById(R.id.btn_deslogar).setOnClickListener(view -> {
             FirebaseHelper.getAuth().signOut();
+
             startActivity(new Intent(this, MainActivity.class));
 
             finish();

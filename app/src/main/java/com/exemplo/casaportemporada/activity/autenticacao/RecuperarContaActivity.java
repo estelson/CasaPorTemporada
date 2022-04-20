@@ -60,7 +60,7 @@ public class RecuperarContaActivity extends AppCompatActivity {
     }
 
     private void iniciarComponentes() {
-        TextView text_titulo = findViewById(R.id.text_titulo_anuncio);
+        TextView text_titulo = findViewById(R.id.text_titulo);
         text_titulo.setText("Recuperar conta");
 
         edit_email = findViewById(R.id.edit_email);
